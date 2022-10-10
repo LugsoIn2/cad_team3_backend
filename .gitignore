@@ -1,8 +1,6 @@
 # venv dir ##
 venv
 
-
-
 # MacOS General
 .DS_Store
 .AppleDouble
@@ -58,3 +56,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+__pycache__
