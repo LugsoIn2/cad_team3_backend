@@ -9,7 +9,6 @@ venv
 # Icon must end with two \r
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -29,6 +28,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Media Files uploaded
+cad_team3_backend/media/
+
+# SQLite Database
+cad_team3_backend/*.sqlite3
+*.sqlite3
 
 # Windows general
 # Windows thumbnail cache files
