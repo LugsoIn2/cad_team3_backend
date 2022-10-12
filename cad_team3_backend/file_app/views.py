@@ -23,4 +23,4 @@ class FileQueryView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter,)
     queryset = File.objects.all()
     serializer_class = FileSerializer
-    search_fields = ['title', 'file']
+    search_fields = ['title', 'file', 'filename']
