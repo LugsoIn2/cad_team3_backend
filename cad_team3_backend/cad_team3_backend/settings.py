@@ -141,5 +141,5 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
-    'ec2-18-185-124-22.eu-central-1.compute.amazonaws.com',
+    'http://ec2-18-185-124-22.eu-central-1.compute.amazonaws.com',
 ]
