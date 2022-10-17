@@ -143,3 +143,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'http://ec2-18-185-124-22.eu-central-1.compute.amazonaws.com',
 ]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'DELETE',
+]
