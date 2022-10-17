@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ltaw7@86ax_mclgjnhz3#cx$fyag8#_z#rl(2ahvxg=$%+2s!k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-35-158-155-239.eu-central-1.compute.amazonaws.com']
 
 
 # Application definition
@@ -141,5 +141,5 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
-    'ec2-18-185-124-22.eu-central-1.compute.amazonaws.com:8080',
+    'ec2-18-185-124-22.eu-central-1.compute.amazonaws.com',
 ]
