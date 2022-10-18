@@ -144,7 +144,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://cad-team3.netpy.de',
-    'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com'
+    'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com',
 ]
 
 CORS_ALLOW_METHODS = [
