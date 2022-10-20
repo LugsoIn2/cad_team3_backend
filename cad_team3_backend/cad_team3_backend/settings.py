@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-ltaw7@86ax_mclgjnhz3#cx$fyag8#_z#rl(2ahvxg=$%+2s!k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cad-team3-lb-backend-e5c9e47bd24bd964.elb.eu-central-1.amazonaws.com',
+'cad-team3-backend.netpy.de','cad-team3-lb-backend.netpy.de',
+]
 
 
 # Application definition
@@ -141,5 +143,14 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
-    'ec2-18-185-124-22.eu-central-1.compute.amazonaws.com:8080',
+    'https://cad-team3.netpy.de',
+    'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com',
+    'http://cad-team3-lb.netpy.de',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'DELETE',
 ]
