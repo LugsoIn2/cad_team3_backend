@@ -6,6 +6,7 @@ if [ ! -z "$1" ]
 then
     case $1 in
     help)
+        # Help
         echo "You have so many opportunities!!!"
         echo "- create-image {instance_id} {image_target_name}"
         ;;
@@ -20,6 +21,7 @@ then
         fi
         ;;
     create-instance)
+        # Create Instance
         echo "creating instance"
         ;;
     *)
