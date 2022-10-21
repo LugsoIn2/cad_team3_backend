@@ -147,7 +147,7 @@ then
                 ;;
             esac
         else
-            echo "please define the instance-id and the name of the image"
+            echo "please define frontend or backend, the instance-id and the name of the image"
         fi
         ;;
     start-instance)
