@@ -15,19 +15,21 @@ function start-instance {
         if [ ! -z "$1" ]
         then
             aws ec2 start-instances --instance-ids $1
+            aws ec2 wait instance-running --instance-ids $1
         else
             echo "please define the instance-id to start this instance"
         fi 
 }
 
 function stop-instance {
-echo "stop instance...FIXME"
+        echo "stop instance...FIXME"
 }
 
 
 function run-instance-frontend {
         #create instance into the correct sec-group 
         new_instanceid=$(run-instance $1 $2 sg-0b50ec9c7e17ff370)
+        echo $new_instanceid
         #waiting for running
         aws ec2 wait instance-running --instance-ids $new_instanceid
         #add new instance to load-balancer target group
@@ -59,7 +61,8 @@ function run-instance {
             --key-name cad_team3_ \
             --security-group-ids "$3" \
             --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$2}]" \
-            | jq -r '.Instances' | jq -r '.[0]' | jq -r '.InstanceId')
+            --query "Instances[*].[InstanceId]" \
+            --output text)
 
             # return the new instanceid
             echo $new_instanceid
@@ -76,22 +79,21 @@ function add-to-lb-targetgroup {
            aws elbv2 register-targets \
            --target-group-arn $1 \
            --targets Id=$2,Port=443
+           #wait until is healthy
+           aws elbv2 wait target-in-service \
+           --target-group-arn $1 \
+           --targets Id=$2,Port=443
         else
             echo "please define the image-id and instance name to run a instance from ami"
         fi 
 }
 
 function delete-instance {
-    echo "delete FIXME"
+    aws ec2 terminate-instances --instance-ids $1
+    aws ec2 wait instance-terminated --instance-ids $1
 }
 
 function check-dependency {
-if ! command -v jq &> /dev/null
-then
-    echo "the dependency jq could not be found"
-    echo "please install the cli tool jq"
-    exit
-fi
 if ! command -v aws &> /dev/null
 then
     echo "the dependency aws could not be found"
@@ -107,8 +109,8 @@ function print-help {
         echo "- create-image {instance_id} {image_target_name}"
         echo "- run-instance {frontend or backend} {image_id} {instance_name}"
         echo "- start-instance {instance_id}"
-        echo "- stop-instance FIXME"
-        echo "- delete-instance FIXME"
+        echo "- stop-instance {instance_id}"
+        echo "- delete-instance {instance_id}"
         echo " "
 }
 
@@ -157,7 +159,7 @@ then
         stop-instance $2
         ;;
     delete-instance)
-
+        delete-instance $2
         ;;
     *)
         echo "Wrong argument"
