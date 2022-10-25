@@ -22,7 +22,14 @@ function start-instance {
 }
 
 function stop-instance {
-        echo "stop instance...FIXME"
+        echo "stop instance..."
+        if [ ! -z "$1" ]
+        then
+            aws ec2 stop-instances --instance-ids $1
+            aws ec2 wait instance-stopped --instance-ids $1
+        else
+            echo "please define the instance-id to stop this instance"
+        fi 
 }
 
 
