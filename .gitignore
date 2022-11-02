@@ -68,3 +68,5 @@ __pycache__
 .env
 
 cad_team3_backend.zip
+
+cad_team3_backend/static/
