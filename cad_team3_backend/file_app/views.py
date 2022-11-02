@@ -4,23 +4,48 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import FileSerializer
-from .models import File
 from rest_framework import generics, filters
+from django.http import JsonResponse
+from datetime import datetime
+import boto3
+from django.conf import settings
 
-class FileUploadView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+# Dynamodb configuration
+dynamodb = boto3.resource(
+    'dynamodb',
+    aws_access_key_id=settings.AWS_ACCESS_KEY,
+    aws_secret_access_key=settings.AWS_SECRET,
+    region_name='eu-central-1')
 
-    def post(self, request, *args, **kwargs):
-        file_serializer = FileSerializer(data=request.data)
-        if file_serializer.is_valid():
-            file_serializer.save()
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# Get All Files
+def list(request):
+    table = dynamodb.Table('CAD_Team3')
+    response = table.scan()
+    if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+        try:
+            items = response['Items']
+        except KeyError as e:
+            print('Something went wrong')
+        return JsonResponse(items, safe=False)
 
-class FileQueryView(generics.ListAPIView):
-    filter_backends = (filters.SearchFilter,)
-    queryset = File.objects.all()
-    serializer_class = FileSerializer
-    search_fields = ['title', 'file', 'filename']
+# Upload a File
+def upload(request):
+    # Get Parameters
+    filebinary = request.FILES["file"]
+    filename = request.POST.get('filename')
+    title = request.POST.get('title')
+    # Upload file to S3 Storage
+    s3 = boto3.resource('s3')
+    image = s3.Object('cad-team3-filebucket', filename)
+    image.put(Body=filebinary)
+    # Upload meta to DynamoDB
+    table = dynamodb.Table('CAD_Team3')
+    item = table.put_item(
+        Item={
+            'file': 'https://cad-team3-filebucket.s3.eu-central-1.amazonaws.com/' + filename,
+            'filename': filename,
+            'title': title,
+            'timestamp': str(datetime.now())
+        })
+    # Return item
+    return JsonResponse(item, safe=False) 

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,9 +27,11 @@ SECRET_KEY = 'django-insecure-ltaw7@86ax_mclgjnhz3#cx$fyag8#_z#rl(2ahvxg=$%+2s!k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cad-team3-lb-backend-e5c9e47bd24bd964.elb.eu-central-1.amazonaws.com',
+ALLOWED_HOSTS = [
+'cad-team3-lb-backend-e5c9e47bd24bd964.elb.eu-central-1.amazonaws.com',
 'cad-team3-backend.netpy.de',
 'cad-team3-lb-backend.netpy.de',
+'localhost'
 ]
 
 
@@ -51,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+   # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -156,3 +159,8 @@ CORS_ALLOW_METHODS = [
     'OPTIONS',
     'DELETE',
 ]
+
+env = environ.Env()
+environ.Env.read_env()
+AWS_ACCESS_KEY=env('AWS_ACCESS_KEY')
+AWS_SECRET=env('AWS_SECRET')
