@@ -62,3 +62,7 @@ $RECYCLE.BIN/
 *.lnk
 
 __pycache__
+
+
+# Environment vars
+.env
