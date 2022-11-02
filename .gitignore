@@ -66,3 +66,5 @@ __pycache__
 
 # Environment vars
 .env
+
+cad_team3_backend.zip

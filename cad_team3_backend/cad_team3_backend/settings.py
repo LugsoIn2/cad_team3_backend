@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 'cad-team3-lb-backend.netpy.de',
 'localhost',
 'cadteam3backend-env-1.eba-mjpyitun.eu-central-1.elasticbeanstalk.com',
+'172.31.24.234'
 ]
 
 
