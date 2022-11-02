@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
 'cad-team3-lb-backend-e5c9e47bd24bd964.elb.eu-central-1.amazonaws.com',
 'cad-team3-backend.netpy.de',
 'cad-team3-lb-backend.netpy.de',
-'localhost'
+'localhost',
+'cadteam3backend-env-1.eba-mjpyitun.eu-central-1.elasticbeanstalk.com',
 ]
 
 
@@ -151,6 +152,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com',
     'http://cad-team3-lb.netpy.de',
     'https://cad-team3-lb.netpy.de',
+    'http://cad-team3-frontend.s3-website.eu-central-1.amazonaws.com',
 ]
 
 CORS_ALLOW_METHODS = [
