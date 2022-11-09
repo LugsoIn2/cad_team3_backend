@@ -35,6 +35,8 @@ ALLOWED_HOSTS = [
 'cadteam3backend-env-1.eba-mjpyitun.eu-central-1.elasticbeanstalk.com',
 '172.31.24.234',
 '127.0.0.1',
+'cad-team3-tf-backend-env.eba-wtsqm58b.eu-central-1.elasticbeanstalk.com',
+'*'
 ]
 
 
@@ -149,15 +151,18 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'https://cad-team3.netpy.de',
-    'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com',
-    'http://cad-team3-lb.netpy.de',
-    'https://cad-team3-lb.netpy.de',
-    'http://cad-team3-frontend.s3-website.eu-central-1.amazonaws.com',
-]
+#CORS_ALLOWED_ORIGINS = [
+    #'http://localhost:8080',
+    #'https://cad-team3.netpy.de',
+    #'http://cad-team3-lb-frontend-6835d12a5f295d8b.elb.eu-central-1.amazonaws.com',
+    #'http://cad-team3-lb.netpy.de',
+    #'https://cad-team3-lb.netpy.de',
+    #'http://cad-team3-frontend.s3-website.eu-central-1.amazonaws.com',
+    #'*',
+    #'http://cad-team3-frontend-tf.s3-website.eu-central-1.amazonaws.com',
+#]
 
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
